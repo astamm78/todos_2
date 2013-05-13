@@ -90,22 +90,14 @@ class Controller
     arguments = arguments.split
     task_id = arguments.shift.to_i
     tag = arguments.join(" ")
-    previous_tags = [Task.find_by_id(task_id).tag]
-    previous_tags << tag
-    Task.find_by_id(task_id).update_attribute(:tag, previous_tags.join(", "))
+    Tag.create(:task_id => task_id, :content => tag)
     @viewer.added_tag(task_id, tag)
   end
 
   def view_by_tag(tag)
     results = []
-    Task.all.each do |task|
-      # p tag
-      # p task.tag
-      if task.tag =~ /#{tag}/
-        results << task
-      end
-    end
-    @viewer.list(results)
+    Tag.where(:content => tag).each { |tag| results << tag.task_id }
+    results.each { |task_id| @viewer.list( Task.where(:id => task_id) ) }
   end
 
 end

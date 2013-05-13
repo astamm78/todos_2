@@ -17,7 +17,9 @@ class Viewer
       output << "List: #{List.find_by_id(item.list_id).name} ".ljust(14)
       output << "ID: #{item.id} #{item.content}".ljust(65)
       output << "#{print_complete}".rjust(20)
-      output << "  Tag: #{item.tag}"
+      tags = []
+      Tag.find_all_by_task_id(item.id).each { |tag| tags << tag.content }
+      output << "  Tags: #{tags.join(", ")}"
       puts output
     end
   end

@@ -12,3 +12,5 @@ Task.create(:content => "Drink too much gin", :list_id => 2, :completed => 0)
 Task.create(:content => "Overhear Lil and Danny in neighboring room", :list_id => 2, :completed => 0)
 Task.create(:content => "Burst into neighboring room and declare a showdown", :list_id => 2, :completed => 0)
 Task.create(:content => "Get shot by Danny and collapse in corner", :list_id => 2, :completed => 0)
+
+Tag.create(:task_id => 3, :content => 'home')
